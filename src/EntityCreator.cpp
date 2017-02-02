@@ -25,7 +25,8 @@ void TankBaseCreator::create(entityx::Entity& entity)
 	entity.assign<Tank>(entity.id());	
 	entity.assign<Motion>(0);
 	entity.assign<Position>(m_position, 0.0);
-	entity.assign<Volume>(volume);		
+	entity.assign<Volume>(volume);	
+	entity.assign<PlayerControl>();
 	if (m_isAi)
 	{
 		// TODO: Assign relevant components for AI
@@ -54,7 +55,7 @@ void TurretCreator::create(entityx::Entity& entity)
 	entity.assign<Motion>(0);	
 	entity.assign<Position>(sf::Vector2f(m_tankData.m_position.x, m_tankData.m_position.y), 0.0);
 	entity.assign<Volume>(volume);
-	
+	entity.assign<PlayerControl>();
 	entity.assign<Parent>(m_parentEntity);	
 	// Solution for Turret problem here:
 	// http://gamedev.stackexchange.com/questions/31888/in-an-entity-component-system-engine-how-do-i-deal-with-groups-of-dependent-ent

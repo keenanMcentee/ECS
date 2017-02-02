@@ -5,13 +5,14 @@
 #include "entityx/Event.h"
 #include "entityx/Entity.h"
 #include "entityx/System.h"
-
+#include "KeyHandler.h"
 #include "GameManager.h"
 #include "ScreenSize.h"
 #include "systems/LevelSystem.h"
 #include "systems/RenderSystem.h"
 #include "systems/MovementSystem.h"
-
+#include <SFML/Window/Keyboard.hpp>
+#include "systems/PlayerControlSystem.h"
 /// <summary>
 /// @Author Ross Palmer
 /// @Version 1.0
@@ -46,7 +47,7 @@ private:
 
 	/// The EntityX system manager.
 	entityx::SystemManager m_systemManager;
-
+	KeyHandler m_keyHandler;
 	/// An object to manage games states.
 	GameManager m_gameManager;
 };

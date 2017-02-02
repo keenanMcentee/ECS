@@ -84,9 +84,13 @@ void Game::processInput()
 		case sf::Event::Closed:
 			m_window.close();			
 			break;
-		case sf::Event::KeyPressed:				
+		case sf::Event::KeyPressed:
+			m_eventManager.emit<EvKeyboard>(event.key.code, true);
+			m_keyHandler.updateKey(event.key.code, true);
 			break;
-		case sf::Event::KeyReleased:					
+		case sf::Event::KeyReleased:
+			m_eventManager.emit<EvKeyboard>(event.key.code, false);
+			m_keyHandler.updateKey(event.key.code, false);
 			break;
 		default:
 			break;
@@ -106,7 +110,8 @@ void Game::update()
 
 	if (state == GameState::Playing)
 	{		
-		m_systemManager.update<MovementSystem>(MS_PER_UPDATE);		
+		m_systemManager.update<MovementSystem>(MS_PER_UPDATE);	
+		m_systemManager.update<PlayerControlSystem>(MS_PER_UPDATE);
 	}
 }
 
@@ -132,6 +137,7 @@ void Game::createSystems()
 
 	m_systemManager.add<LevelSystem>(m_entityManager, m_eventManager);
 	m_systemManager.add<RenderSystem>(m_window, spTexture);	
+	m_systemManager.add<PlayerControlSystem>(m_keyHandler);
 	m_systemManager.add<MovementSystem>();	
 	m_systemManager.configure();
 }

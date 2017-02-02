@@ -2,7 +2,7 @@
 #include "entityx/Event.h"
 #include "entityx/Entity.h"
 #include "utils/LevelLoader.h"
-
+#include <SFML/Window/Keyboard.hpp>
 /// <summary>
 /// The start game event.
 /// </summary>
@@ -32,4 +32,23 @@ struct EvInit : public entityx::Event<EvInit>
 	int m_levelNr;
 	LevelData const& m_level;
 };
+/// <summary>
+/// A keyboard event.
+/// </summary>
+struct EvKeyboard : public entityx::Event<EvKeyboard>
+{
+	/// <summary>
+	/// Constructs this event with the key and key pressed status parameters.
+	/// </summary>
+	/// <param name="key">the SFML key associated with this event</param>
+	/// <param name="score">if true, key is down</param>
+	/// </summary>
+	EvKeyboard(sf::Keyboard::Key key, bool isDown)
+		: m_key(key)
+		, m_isDown(isDown)
+	{
+	}
 
+	sf::Keyboard::Key m_key;
+	bool m_isDown;
+};

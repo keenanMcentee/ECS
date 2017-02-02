@@ -48,6 +48,7 @@
     <ClCompile Include="src\components\Display.cpp" />
     <ClCompile Include="src\components\Motion.cpp" />
     <ClCompile Include="src\components\Parent.cpp" />
+    <ClCompile Include="src\components\PlayerControl.cpp" />
     <ClCompile Include="src\components\Position.cpp" />
     <ClCompile Include="src\components\Tank.cpp" />
     <ClCompile Include="src\components\Turret.cpp" />
@@ -55,11 +56,13 @@
     <ClCompile Include="src\EntityCreator.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameManager.cpp" />
+    <ClCompile Include="src\KeyHandler.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ResourcePath.cpp" />
     <ClCompile Include="src\ScreenSize.cpp" />
     <ClCompile Include="src\systems\LevelSystem.cpp" />
     <ClCompile Include="src\systems\MovementSystem.cpp" />
+    <ClCompile Include="src\systems\PlayerControlSystem.cpp" />
     <ClCompile Include="src\systems\RenderSystem.cpp" />
     <ClCompile Include="src\utils\CollisionBox.cpp" />
     <ClCompile Include="src\utils\LevelLoader.cpp" />

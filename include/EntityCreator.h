@@ -11,6 +11,7 @@
 #include "components/Display.h"
 #include "components/Turret.h"
 #include "components/Parent.h"
+#include "components/PlayerControl.h"
 #include "utils/LevelLoader.h"
 
 
