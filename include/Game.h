@@ -13,6 +13,7 @@
 #include "systems/MovementSystem.h"
 #include <SFML/Window/Keyboard.hpp>
 #include "systems/PlayerControlSystem.h"
+#include "systems/AiControlSystem.h"
 /// <summary>
 /// @Author Ross Palmer
 /// @Version 1.0
