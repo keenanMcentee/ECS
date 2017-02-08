@@ -47,6 +47,7 @@
     <ClInclude Include="include\utils\BTMath.h" />
     <ClInclude Include="include\utils\CollisionBox.h" />
     <ClInclude Include="include\utils\LevelLoader.h" />
+    <ClInclude Include="Waypoint.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AI\TankAi.cpp" />
@@ -76,6 +77,7 @@
     <ClCompile Include="src\utils\BTMath.cpp" />
     <ClCompile Include="src\utils\CollisionBox.cpp" />
     <ClCompile Include="src\utils\LevelLoader.cpp" />
+    <ClCompile Include="Waypoint.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6EE6159A-995A-4B16-B956-E569C13351B0}</ProjectGuid>

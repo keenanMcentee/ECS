@@ -14,6 +14,7 @@
 #include "components/PlayerControl.h"
 #include "utils/LevelLoader.h"
 #include "components/Wall.h" 
+#include "Waypoint.h"
 #include "components/AI.h"
 #include "ai/TankAI.h"
 
@@ -73,4 +74,19 @@ private:
 	std::string m_type;
 	sf::Vector2f m_position;
 	double m_rotation;
+};
+class NodeCreator : public ICreatable
+{
+public:
+
+	NodeCreator(std::string type,
+		sf::Vector2f position,
+		float radius);
+
+	void create(entityx::Entity& entity);
+
+private:
+	std::string m_type;
+	sf::Vector2f m_position;
+	float m_radius;
 };

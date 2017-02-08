@@ -125,15 +125,15 @@ const sf::CircleShape TankAi::findMostThreateningObstacle(entityx::Entity::Id ai
 		if (Math::lineIntersectsCircle(m_ahead, m_halfAhead, obstacle))
 		{
 			float distance = Math::distance(entities.get(aiId).component<Position>()->m_position, obstacle.getPosition());
-			if (distance < closestDistance)
+			if (mostThreatening.getRadius() == 0 || distance < distToClosest)
 			{
-				closestDistance = distance;
-				emptyObstacle = obstacle;
+				distToClosest = distance;
+				mostThreatening = obstacle;
 			}
 
 		}
 	}
 	//if (mostThreatening.getRadius() == 0)
-	return m_obstacles.at(0);
+	return mostThreatening;
 }
 

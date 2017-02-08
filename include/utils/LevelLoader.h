@@ -14,6 +14,12 @@ struct ObstacleData
   sf::Vector2f m_position;
   double m_rotation;
 };
+struct NodeData
+{
+	std::string m_type;
+	sf::Vector2f m_position;
+	float m_radius;
+};
 
 struct BackgroundData
 {
@@ -39,6 +45,7 @@ struct LevelData
    TankData m_tank;
    TankData m_aiTank;
    ProjectileData m_projectile;
+   std::vector<NodeData> m_node;
    std::vector<ObstacleData> m_obstacles;
 };
 

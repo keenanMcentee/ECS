@@ -63,7 +63,8 @@ private:
 	{
 		SEEK_PLAYER,
 		STOP,
-		RETREAT
+		RETREAT,
+		PATH_FOLLOWING
 	} m_aiBehaviour;
   
 
