@@ -213,4 +213,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\levels\level1.yaml">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

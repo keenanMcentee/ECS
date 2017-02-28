@@ -1,10 +1,11 @@
 #include "ai/TankAi.h"
 
 
-TankAi::TankAi(std::vector<sf::CircleShape> const & obstacles, entityx::Entity::Id id)
-  : m_aiBehaviour(AiBehaviour::SEEK_PLAYER)
+TankAi::TankAi(std::vector<sf::CircleShape> const & obstacles, std::vector<sf::CircleShape> const & waypoints, entityx::Entity::Id id)
+  : m_aiBehaviour(AiBehaviour::PATH_FOLLOWING)
   , m_steering(0,0)
   , m_obstacles(obstacles)
+	, m_waypoints(waypoints)
 {
 }
 
@@ -20,6 +21,9 @@ void TankAi::update(entityx::Entity::Id playerId,
 	sf::Vector2f vectorToPlayer = seek(playerId,
 		aiId,
 		entities);
+
+	sf::Vector2f vectorToNode = seek(aiId, entities);
+
 	switch (m_aiBehaviour)
 	{
 	case AiBehaviour::SEEK_PLAYER:
@@ -31,6 +35,13 @@ void TankAi::update(entityx::Entity::Id playerId,
 		break;
 	case AiBehaviour::STOP:
 		motion->m_speed = 0;
+
+	case AiBehaviour::PATH_FOLLOWING:
+		m_steering += thor::unitVector(vectorToNode);
+		m_steering += collisionAvoidance(aiId, entities);
+		m_steering = Math::truncate(m_steering, MAX_FORCE);
+		m_velocity = Math::truncate(m_velocity + m_steering, MAX_SPEED);
+		break;
 	default:
 		break;
 	}
@@ -52,23 +63,40 @@ void TankAi::update(entityx::Entity::Id playerId,
 	else if ((static_cast<int>(std::round(dest - currentRotation + 360))) % 360 < 180)
 	{
 		// rotate clockwise
-		position->m_rotation += 1;
+		position->m_rotation = static_cast<int>((position->m_rotation) + 1) % 360;
 	}
 	else
 	{
 		// rotate anti-clockwise
-		position->m_rotation -= 1;
+		position->m_rotation = static_cast<int>((position->m_rotation) - 1) % 360;
 	}
 
-	
-	if (thor::length(vectorToPlayer) < MAX_SEE_AHEAD)
+	if (m_aiBehaviour != AiBehaviour::PATH_FOLLOWING)
 	{
-		m_aiBehaviour = AiBehaviour::STOP;
-	}	
+		if (thor::length(vectorToPlayer) < MAX_SEE_AHEAD)
+		{
+			m_aiBehaviour = AiBehaviour::STOP;
+		}
+		else
+		{
+			motion->m_speed = thor::length(m_velocity);
+			m_aiBehaviour = AiBehaviour::SEEK_PLAYER;
+		}
+	}
 	else
 	{
-		motion->m_speed = thor::length(m_velocity);	
-		m_aiBehaviour = AiBehaviour::SEEK_PLAYER;
+		if (thor::length(vectorToNode) < m_waypoints.at(currentNode).getRadius())
+		{
+			if (currentNode < 20)
+				currentNode += 1;
+			else
+				currentNode = 0;
+		}
+		else
+		{
+			motion->m_speed = thor::length(m_velocity);
+			m_aiBehaviour = AiBehaviour::PATH_FOLLOWING;
+		}
 	}
 }
 
@@ -81,6 +109,16 @@ sf::Vector2f TankAi::seek(entityx::Entity::Id playerId,
 	sf::Vector2f aiPos = aiTank.component<Position>()->m_position;
 	sf::Vector2f playerPos = playerTank.component<Position>()->m_position;
 	sf::Vector2f returnVect = playerPos - aiPos;
+	return returnVect;
+
+}
+sf::Vector2f TankAi::seek(entityx::Entity::Id aiId,
+	entityx::EntityManager& entities) const
+{
+	entityx::Entity aiTank = entities.get(aiId);
+	sf::Vector2f aiPos = aiTank.component<Position>()->m_position;
+	sf::Vector2f nodePos = m_waypoints.at(currentNode).getPosition();
+	sf::Vector2f returnVect = nodePos - aiPos;
 	return returnVect;
 
 }

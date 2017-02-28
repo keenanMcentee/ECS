@@ -79,6 +79,9 @@
     <ClCompile Include="src\utils\LevelLoader.cpp" />
     <ClCompile Include="Waypoint.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\levels\level1.yaml" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6EE6159A-995A-4B16-B956-E569C13351B0}</ProjectGuid>
     <RootNamespace>ECS_Example</RootNamespace>

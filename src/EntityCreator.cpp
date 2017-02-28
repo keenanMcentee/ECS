@@ -102,10 +102,10 @@ NodeCreator::NodeCreator(std::string type,
 void NodeCreator::create(entityx::Entity& entity)
 {
 	auto volume = Volume();
-	volume.m_box = CollisionBox(33, 23);
+	volume.m_box = CollisionBox(m_radius, m_radius);
 
 	entity.assign<Volume>(volume);
-	entity.assign<Display>(sf::IntRect(2, 129, 33, 23));
+	entity.assign<Display>(sf::IntRect(19,175,12,12));
 	entity.assign<Position>(m_position);
 	entity.assign<Waypoint>();
 

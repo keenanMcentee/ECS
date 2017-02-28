@@ -12,7 +12,7 @@ void operator >> (const YAML::Node& waypointNode, NodeData& waypoint)
 	waypoint.m_type = waypointNode["type"].as<std::string>();
 	waypoint.m_position.x = waypointNode["position"]["x"].as<float>();
 	waypoint.m_position.y = waypointNode["position"]["y"].as<float>();
-	waypoint.m_radius = waypointNode["rotation"].as<double>();
+	waypoint.m_radius = waypointNode["radius"].as<double>();
 }
 void operator >> (const YAML::Node& backgroundNode, BackgroundData& background)
 {
@@ -43,6 +43,13 @@ void operator >> (const YAML::Node& levelNode, LevelData& level)
 
    levelNode["projectile"] >> level.m_projectile;
 
+   const YAML::Node& waypointNode = levelNode["waypoints"].as<YAML::Node>();
+   for (unsigned i = 0; i < waypointNode.size(); ++i)
+   {
+	   NodeData node;
+	   waypointNode[i] >> node;
+	   level.m_node.push_back(node);
+   }
 
    const YAML::Node& obstaclesNode = levelNode["obstacles"].as<YAML::Node>();
    for (unsigned i = 0; i < obstaclesNode.size(); ++i)
@@ -51,13 +58,7 @@ void operator >> (const YAML::Node& levelNode, LevelData& level)
 	  obstaclesNode[i] >> obstacle;
 	  level.m_obstacles.push_back(obstacle);
    }
-   const YAML::Node& waypointNode = levelNode["waypoints"].as<YAML::Node>();
-   for (unsigned i = 0; i < waypointNode.size(); ++i)
-   {
-	   NodeData node;
-	   waypointNode[i] >> node;
-	   level.m_node.push_back(node);
-   }
+ 
 }
 
 LevelLoader::LevelLoader()
