@@ -10,7 +10,7 @@ void AiControlSystem::configure(entityx::EventManager& events)
    events.subscribe<EvReportPlayerId>(*this);
    events.subscribe<entityx::ComponentAddedEvent<Ai>>(*this);
    events.subscribe<entityx::ComponentAddedEvent<Wall>>(*this);
-   events.subscribe < entityx::ComponentAddedEvent<Waypoint>>(*this);
+   events.subscribe<entityx::ComponentAddedEvent<Waypoint>>(*this);
 }
 
 void AiControlSystem::receive(const EvReportPlayerId& e)
@@ -35,6 +35,18 @@ void AiControlSystem::receive(const entityx::ComponentAddedEvent<Wall>& e)
 	circle.setOrigin(circle.getRadius(), circle.getRadius());
 	circle.setPosition(wallPos->m_position);
 	m_obstacles.push_back(circle);	
+}
+void AiControlSystem::receive(const entityx::ComponentAddedEvent<Waypoint>& e)
+{
+	entityx::Entity ent = e.entity;
+	Volume::Handle waypointVol = ent.component<Volume>();
+	Position::Handle waypointPos = ent.component<Position>();
+	Display::Handle waypointDisplay = ent.component<Display>();
+
+	sf::CircleShape circle(waypointVol->m_box.getRect().width * 1.5f);
+	circle.setOrigin(circle.getRadius(), circle.getRadius());
+	circle.setPosition(waypointPos->m_position);
+	m_waypoints.push_back(circle);
 }
 
 void AiControlSystem::receive(const entityx::ComponentAddedEvent<Waypoint>& e)

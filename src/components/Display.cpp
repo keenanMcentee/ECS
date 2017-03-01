@@ -17,3 +17,4 @@ Display::Display(const sf::IntRect& coord, sf::Color color)
 {
 }
 
+

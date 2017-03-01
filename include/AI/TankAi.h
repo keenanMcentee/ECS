@@ -15,7 +15,7 @@ class TankAi
 {
 public:
 
-   TankAi(std::vector<sf::CircleShape> const & obstacles, std::vector<sf::CircleShape> const & waypoints,entityx::Entity::Id id);
+   TankAi(std::vector<sf::CircleShape> const & obstacles, std::vector<sf::CircleShape> const & waypoints, entityx::Entity::Id id);
 
 
    void update(entityx::Entity::Id playerId,  
@@ -28,11 +28,14 @@ public:
 	   AI_ID_NONE, 
 	   AI_ID_SEEK_SHOOT_AT_PLAYER
    };
-
+   std::vector<sf::CircleShape> const & m_waypoints;
 private:
 	sf::Vector2f seek(entityx::Entity::Id playerId,
 					  entityx::Entity::Id aiId,
 					  entityx::EntityManager& entities) const;
+
+	sf::Vector2f seek(entityx::Entity::Id aiId,
+		entityx::EntityManager& entities) const;
 
 	sf::Vector2f collisionAvoidance(entityx::Entity::Id aiId, 
 						            entityx::EntityManager& entities);
@@ -56,9 +59,10 @@ private:
 
 	float MAX_SPEED = 50.0f;
 
+	int currentNode = 0;
 
 	std::vector<sf::CircleShape> const & m_obstacles;
-	std::vector<sf::CircleShape> const & m_waypoints;
+	
 
 	enum class AiBehaviour
 	{

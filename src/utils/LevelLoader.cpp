@@ -43,6 +43,14 @@ void operator >> (const YAML::Node& levelNode, LevelData& level)
 
    levelNode["projectile"] >> level.m_projectile;
 
+   const YAML::Node& waypointNode = levelNode["waypoints"].as<YAML::Node>();
+   for (unsigned i = 0; i < waypointNode.size(); ++i)
+   {
+	   NodeData node;
+	   waypointNode[i] >> node;
+	   level.m_node.push_back(node);
+   }
+
    const YAML::Node& obstaclesNode = levelNode["obstacles"].as<YAML::Node>();
    for (unsigned i = 0; i < obstaclesNode.size(); ++i)
    {
@@ -50,13 +58,7 @@ void operator >> (const YAML::Node& levelNode, LevelData& level)
 	  obstaclesNode[i] >> obstacle;
 	  level.m_obstacles.push_back(obstacle);
    }
-   const YAML::Node& waypointNode = levelNode["waypoints"].as<YAML::Node>();
-   for (unsigned i = 0; i < waypointNode.size(); ++i)
-   {
-	   WaypointData waypoint;
-	   waypointNode[i] >> waypoint;
-	   level.m_waypoint.push_back(waypoint);
-   }
+ 
 }
 
 LevelLoader::LevelLoader()

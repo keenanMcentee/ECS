@@ -13,67 +13,67 @@ projectile:
    damage: 10	
 waypoints:
    - type: node
-     position: {x: 100, y:100}
+     position: {x: 100, y: 100}
      radius: 20
    - type: node
-     position: {x: 200, y:100}
+     position: {x: 500, y: 250}
      radius: 20
    - type: node
-     position: {x: 200, y:300}
+     position: {x: 700, y: 150}
      radius: 20
    - type: node
-     position: {x: 400, y:300}
+     position: {x: 700, y: 500}
      radius: 20
    - type: node
-     position: {x: 400, y:100}
+     position: {x: 1000, y: 500}
      radius: 20
    - type: node
-     position: {x: 500, y:100}
+     position: {x: 1200, y: 100}
      radius: 20
    - type: node
-     position: {x: 500, y:400}
+     position: {x: 1410, y: 100}
      radius: 20
    - type: node
-     position: {x: 400, y:400}
+     position: {x: 800, y: 850}
      radius: 20
    - type: node
-     position: {x: 400, y:500}
+     position: {x: 500, y: 150}
      radius: 20
    - type: node
-     position: {x: 300, y:500}
+     position: {x: 800, y: 150}
      radius: 20
    - type: node
-     position: {x: 300, y:400}
+     position: {x: 850, y: 600}
      radius: 20
    - type: node
-     position: {x: 400, y:400}
+     position: {x: 150, y: 800}
      radius: 20
    - type: node
-     position: {x: 400, y:300}
+     position: {x: 500, y: 500}
      radius: 20
    - type: node
-     position: {x: 300, y:300}
+     position: {x: 1200, y: 800}
      radius: 20
    - type: node
-     position: {x: 300, y:200}
+     position: {x: 1400, y: 50}
      radius: 20
    - type: node
-     position: {x: 200, y:200}
+     position: {x: 100, y: 100}
      radius: 20
    - type: node
-     position: {x: 200, y:400}
+     position: {x: 100, y: 750}
      radius: 20
    - type: node
-     position: {x: 300, y:400}
+     position: {x: 600, y: 100}
      radius: 20
    - type: node
-     position: {x: 300, y:200}
+     position: {x: 650, y: 800}
      radius: 20
    - type: node
-     position: {x: 100, y:200}
+     position: {x: 1000, y: 50}
      radius: 20
    - type: node
-     position: {x: 150, y:150}
+     position: {x: 100, y: 800}
      radius: 20
 obstacles: 
    - type: wall
