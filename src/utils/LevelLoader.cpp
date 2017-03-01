@@ -46,9 +46,9 @@ void operator >> (const YAML::Node& levelNode, LevelData& level)
    const YAML::Node& waypointNode = levelNode["waypoints"].as<YAML::Node>();
    for (unsigned i = 0; i < waypointNode.size(); ++i)
    {
-	   NodeData node;
+	   WaypointData node;
 	   waypointNode[i] >> node;
-	   level.m_node.push_back(node);
+	   level.m_waypoint.push_back(node);
    }
 
    const YAML::Node& obstaclesNode = levelNode["obstacles"].as<YAML::Node>();

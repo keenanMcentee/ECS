@@ -49,19 +49,6 @@ void AiControlSystem::receive(const entityx::ComponentAddedEvent<Waypoint>& e)
 	m_waypoints.push_back(circle);
 }
 
-void AiControlSystem::receive(const entityx::ComponentAddedEvent<Waypoint>& e)
-{
-	entityx::Entity ent = e.entity;
-	Volume::Handle waypointVol = ent.component<Volume>();
-	Position::Handle waypointPos = ent.component<Position>();
-	Display::Handle waypointDisplay = ent.component<Display>();
-
-	sf::CircleShape circle(waypointVol->m_box.getRect().width * 1.5f);
-	circle.setOrigin(circle.getRadius(), circle.getRadius());
-	circle.setPosition(waypointPos->m_position);
-	m_waypoints.push_back(circle);
-}
-
 void AiControlSystem::update(entityx::EntityManager& entities,
                              entityx::EventManager& events,
                              double dt)
@@ -72,7 +59,8 @@ void AiControlSystem::update(entityx::EntityManager& entities,
 	   m_tankAi->update(m_playerId, 
 		                    entity.id(),
 							entities, 
-							dt);
+							dt, 
+							events);
   
    }
 }

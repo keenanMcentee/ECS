@@ -21,7 +21,7 @@ public:
    void update(entityx::Entity::Id playerId,  
 	           entityx::Entity::Id aiId,
                entityx::EntityManager& entities,
-               double dt);
+               double dt, entityx::EventManager &events);
  
    enum class AiType
    {

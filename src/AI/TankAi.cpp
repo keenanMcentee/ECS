@@ -1,6 +1,11 @@
 #include "ai/TankAi.h"
 
-
+/// <summary>
+/// Base constructor for the tank AI.
+/// </summary>
+/// <param name="obstacles"></param>
+/// <param name="waypoints"></param>
+/// <param name="id"></param>
 TankAi::TankAi(std::vector<sf::CircleShape> const & obstacles, std::vector<sf::CircleShape> const & waypoints, entityx::Entity::Id id)
   : m_aiBehaviour(AiBehaviour::PATH_FOLLOWING)
   , m_steering(0,0)
@@ -8,11 +13,18 @@ TankAi::TankAi(std::vector<sf::CircleShape> const & obstacles, std::vector<sf::C
 	, m_waypoints(waypoints)
 {
 }
-
+/// <summary>
+/// Update function for moving the TankAI towards its target and also make sure it doesn't collide with a wall.
+/// </summary>
+/// <param name="playerId"></param>
+/// <param name="aiId"></param>
+/// <param name="entities"></param>
+/// <param name="dt"></param>
+/// <param name="events"></param>
 void TankAi::update(entityx::Entity::Id playerId,
 	entityx::Entity::Id aiId,
 	entityx::EntityManager& entities,
-	double dt)
+	double dt, entityx::EventManager &events)
 {
 	entityx::Entity aiTank = entities.get(aiId);
 	Motion::Handle motion = aiTank.component<Motion>();
@@ -88,9 +100,17 @@ void TankAi::update(entityx::Entity::Id playerId,
 		if (thor::length(vectorToNode) < m_waypoints.at(currentNode).getRadius())
 		{
 			if (currentNode < 20)
+			{
 				currentNode += 1;
+				events.emit<EvCurrentWaypoint>(currentNode);
+			}
 			else
+			{
 				currentNode = 0;
+				events.emit<EvCurrentWaypoint>(currentNode);
+			}
+
+
 		}
 		else
 		{
@@ -99,7 +119,13 @@ void TankAi::update(entityx::Entity::Id playerId,
 		}
 	}
 }
-
+/// <summary>
+/// Function that handles setting the heading of the tank towards the player.
+/// </summary>
+/// <param name="playerId"></param>
+/// <param name="aiId"></param>
+/// <param name="entities"></param>
+/// <returns></returns>
 sf::Vector2f TankAi::seek(entityx::Entity::Id playerId,
 						  entityx::Entity::Id aiId,
 	                      entityx::EntityManager& entities) const  
@@ -112,6 +138,13 @@ sf::Vector2f TankAi::seek(entityx::Entity::Id playerId,
 	return returnVect;
 
 }
+
+/// <summary>
+/// Function to set the heading of the tank toward the currently selected waypoint.
+/// </summary>
+/// <param name="aiId"></param>
+/// <param name="entities"></param>
+/// <returns></returns>
 sf::Vector2f TankAi::seek(entityx::Entity::Id aiId,
 	entityx::EntityManager& entities) const
 {
@@ -122,7 +155,12 @@ sf::Vector2f TankAi::seek(entityx::Entity::Id aiId,
 	return returnVect;
 
 }
-
+/// <summary>
+/// Function that handles avoiding all obstacles.
+/// </summary>
+/// <param name="aiId"></param>
+/// <param name="entities"></param>
+/// <returns></returns>
 sf::Vector2f TankAi::collisionAvoidance(entityx::Entity::Id aiId, 
 									    entityx::EntityManager& entities)
 {
@@ -151,7 +189,12 @@ sf::Vector2f TankAi::collisionAvoidance(entityx::Entity::Id aiId,
     return avoidance;
 }
 
-
+/// <summary>
+/// Function that finds the closest obstacle and sets the tank on the right path to avoid it.
+/// </summary>
+/// <param name="aiId"></param>
+/// <param name="entities"></param>
+/// <returns></returns>
 const sf::CircleShape TankAi::findMostThreateningObstacle(entityx::Entity::Id aiId,
 															     entityx::EntityManager& entities) 
 {		
@@ -171,7 +214,7 @@ const sf::CircleShape TankAi::findMostThreateningObstacle(entityx::Entity::Id ai
 
 		}
 	}
-	//if (mostThreatening.getRadius() == 0)
+	
 	return mostThreatening;
 }
 
