@@ -1,10 +1,11 @@
 #include "ai/TankAi.h"
 
 
-TankAi::TankAi(std::vector<sf::CircleShape> const & obstacles, entityx::Entity::Id id)
-  : m_aiBehaviour(AiBehaviour::SEEK_PLAYER)
+TankAi::TankAi(std::vector<sf::CircleShape> const & obstacles, std::vector<sf::CircleShape> const & waypoints, entityx::Entity::Id id)
+  : m_aiBehaviour(AiBehaviour::PATH_FOLLOWING)
   , m_steering(0,0)
   , m_obstacles(obstacles)
+  , m_waypoints(waypoints)
 {
 }
 

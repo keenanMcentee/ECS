@@ -91,7 +91,7 @@ void WallCreator::create(entityx::Entity& entity)
 	entity.assign<Wall>();
 }
 
-NodeCreator::NodeCreator(std::string type,
+WaypointCreator::WaypointCreator(std::string type,
 	sf::Vector2f position,
 	float radius) 
 	: m_type(type)
@@ -99,7 +99,7 @@ NodeCreator::NodeCreator(std::string type,
 	, m_radius(radius)
 {
 }
-void NodeCreator::create(entityx::Entity& entity)
+void WaypointCreator::create(entityx::Entity& entity)
 {
 	auto volume = Volume();
 	volume.m_box = CollisionBox(33, 23);

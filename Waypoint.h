@@ -3,12 +3,12 @@
 
 enum class WaypointType
 {
-	WaypointDirection,
+	WaypointNode,
 };
 
 struct Waypoint : public entityx::Component<Waypoint>
 {
-	Waypoint(WaypointType type = WaypointType::WaypointDirection);
+	Waypoint(WaypointType type = WaypointType::WaypointNode);
 
 	WaypointType m_type;
 };

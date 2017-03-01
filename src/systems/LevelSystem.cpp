@@ -50,9 +50,9 @@ void LevelSystem::receive(const EvInit& e)
 	   WallCreator(obstacle.m_type, obstacle.m_position, obstacle.m_rotation).create(m_entityManager.create());
    }
    // Create the Nodes
-   for (NodeData const &node : e.m_level.m_node)
+   for (WaypointData const &waypoint : e.m_level.m_waypoint)
    {
-	   NodeCreator(node.m_type, node.m_position, node.m_radius).create(m_entityManager.create());
+	   WaypointCreator(waypoint.m_type, waypoint.m_position, waypoint.m_radius).create(m_entityManager.create());
    }
 }
 

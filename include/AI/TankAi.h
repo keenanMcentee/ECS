@@ -15,7 +15,7 @@ class TankAi
 {
 public:
 
-   TankAi(std::vector<sf::CircleShape> const & obstacles, entityx::Entity::Id id);
+   TankAi(std::vector<sf::CircleShape> const & obstacles, std::vector<sf::CircleShape> const & waypoints,entityx::Entity::Id id);
 
 
    void update(entityx::Entity::Id playerId,  
@@ -58,6 +58,7 @@ private:
 
 
 	std::vector<sf::CircleShape> const & m_obstacles;
+	std::vector<sf::CircleShape> const & m_waypoints;
 
 	enum class AiBehaviour
 	{

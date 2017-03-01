@@ -75,11 +75,11 @@ private:
 	sf::Vector2f m_position;
 	double m_rotation;
 };
-class NodeCreator : public ICreatable
+class WaypointCreator : public ICreatable
 {
 public:
 
-	NodeCreator(std::string type,
+	WaypointCreator(std::string type,
 		sf::Vector2f position,
 		float radius);
 

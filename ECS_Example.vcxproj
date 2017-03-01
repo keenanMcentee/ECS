@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="HUDSystem.h" />
     <ClInclude Include="include\AI\TankAi.h" />
     <ClInclude Include="include\components\Ai.h" />
     <ClInclude Include="include\components\Background.h" />
@@ -50,6 +51,7 @@
     <ClInclude Include="Waypoint.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="HUDSystem.cpp" />
     <ClCompile Include="src\AI\TankAi.cpp" />
     <ClCompile Include="src\components\Ai.cpp" />
     <ClCompile Include="src\components\Background.cpp" />
@@ -78,6 +80,9 @@
     <ClCompile Include="src\utils\CollisionBox.cpp" />
     <ClCompile Include="src\utils\LevelLoader.cpp" />
     <ClCompile Include="Waypoint.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\levels\level1.yaml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6EE6159A-995A-4B16-B956-E569C13351B0}</ProjectGuid>

@@ -10,7 +10,14 @@ struct EvStartGame : public entityx::Event<EvStartGame>
 {
 	EvStartGame() {}
 };
-
+struct EvCurrentWaypoint : public entityx::Event<EvStartGame>
+{
+	int m_path;
+	EvCurrentWaypoint(int path) : m_path(path)
+	{
+		
+	}
+};
 
 /// <summary>
 /// The game initialise event.
